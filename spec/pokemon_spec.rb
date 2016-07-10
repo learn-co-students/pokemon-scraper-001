@@ -1,5 +1,7 @@
 require_relative "spec_helper"
 
+require 'pry'
+
 describe "Pokemon" do
   before do
     @db = SQLite3::Database.new(':memory:')
@@ -22,7 +24,6 @@ describe "Pokemon" do
   describe ".save" do
     it 'saves an instance of a pokemon with the correct id' do
       new_pokemon = Pokemon.save("Pikachu", "fire", @db)
-
       pikachu_from_db = @db.execute("SELECT * FROM pokemon WHERE name = 'Pikachu'")
       expect(pikachu_from_db).to eq([[1, "Pikachu", "fire"]])
     end
